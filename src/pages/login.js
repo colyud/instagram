@@ -1,11 +1,34 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+import FirebaseContext from "../context/firebase";
 import * as ROUTES from "../constants/routes";
 
 export default function Login() {
+    const history = useHistory();
+    const [emailAddress, setEmailAddress] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [error, setError] = useState("");
+
+    const { firebase } = useContext(FirebaseContext);
+    const isInvalid = password === "" || emailAddress === "";
+
     useEffect(() => {
         document.title = "Login - Instagram";
     }, []);
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        try {
+            await firebase.auth().signInWithEmailAndPassword(emailAddress, password);
+            history.push(ROUTES.DASHBOARD);
+        } catch (error) {
+            setEmailAddress("");
+            setPassword("");
+            setError(error.message);
+        }
+    };
 
     return (
         <div className="container flex mx-auto max-w-screen-md items-center h-screen">
@@ -18,20 +41,30 @@ export default function Login() {
                         <img src="/images/logo.png" alt="Instagram" className="mt-2 w-6/12 mb-4" />
                     </h1>
 
-                    <form method="POST">
+                    {error && <p className="mb-4 text-xs text-red-500">{error}</p>}
+
+                    <form onSubmit={handleLogin} method="POST">
                         <input
                             aria-label="Enter your email address"
                             className="text-sm w-full mr-3 py-5 px-4 h-2 border rounded mb-2"
                             type="text"
+                            value={emailAddress}
+                            onChange={(e) => setEmailAddress(e.target.value)}
                             placeholder="Email address"
                         />
                         <input
                             aria-label="Enter your password"
                             className="text-sm w-full mr-3 py-5 px-4 h-2 border rounded mb-2"
                             type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder="Password"
                         />
-                        <button type="submit" className={`bg-blue-500 text-white w-full rounded h-8 font-bold`}>
+                        <button
+                            disabled={isInvalid}
+                            type="submit"
+                            className={`bg-blue-500 text-white w-full rounded h-8 font-bold ${isInvalid && "cursor-not-allowed opacity-50"}`}
+                        >
                             Log In
                         </button>
                     </form>

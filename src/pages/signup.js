@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import FirebaseContext from "../context/firebase";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as ROUTES from "../constants/routes";
 import { doesUsernameExist } from "../services/firebase";
 
 export default function SignUp() {
     const { firebase } = useContext(FirebaseContext);
+    const history = useHistory();
 
     const [username, setUsername] = useState("");
     const [fullName, setFullName] = useState("");
@@ -18,8 +19,8 @@ export default function SignUp() {
     const handleSignUp = async (event) => {
         event.preventDefault();
 
-        const usernameExists = await doesUsernameExist(username);
-        if (!usernameExists.length) {
+        const doesUsernameExistResult = await doesUsernameExist(username);
+        if (!doesUsernameExistResult.length) {
             try {
                 const createdUserResult = await firebase.auth().createUserWithEmailAndPassword(emailAddress, password);
 
@@ -36,17 +37,15 @@ export default function SignUp() {
                     followers: [],
                     dateCreated: Date.now(),
                 });
-
-                // we have to do a redirect to the dashboard
+                history.push(ROUTES.DASHBOARD);
             } catch (error) {
+                setUsername("");
                 setFullName("");
+                setEmailAddress("");
+                setPassword("");
                 setError(error.message);
             }
         } else {
-            setUsername("");
-            setFullName("");
-            setEmailAddress("");
-            setPassword("");
             setError("That username is already taken, please try another!");
         }
     };

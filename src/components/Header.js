@@ -1,16 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import FirebaseContext from "../context/firebase";
+import UserContext from "../context/user";
 import * as ROUTES from "../constants/routes";
-
-// Challenge
-
-// Replace <p>Dashboard</p> with an SVG icon from Hero Icons
-// Replace <p>Sign Out</p> with an SVG icon from Hero Icons
 
 export default function Header() {
     const { firebase } = useContext(FirebaseContext);
-    const user = { displayName: "Karl" };
+    const { user } = useContext(UserContext);
 
     return (
         <header className="h-16 bg-white border-b mb-8">

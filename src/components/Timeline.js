@@ -1,6 +1,6 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
-import useFollowedUsersPhotos from "../hooks/use-followed-users-photos";
+import useFollowedUsersPhotos from "../hooks/use-following-users-photos";
 
 export default function Timeline() {
     const { photos } = useFollowedUsersPhotos();

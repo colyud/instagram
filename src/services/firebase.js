@@ -17,7 +17,7 @@ export async function getUserDocsByUserId(userId) {
     return user; // return user docs in firebase collection
 }
 
-export async function getUserFollowedPhotos(userId, followingUserIds) {
+export async function getUserFollowingPhotos(userId, followingUserIds) {
     const result = await firebase.firestore().collection("photos").where("userId", "in", followingUserIds).get();
 
     const userFollowedPhotos = result.docs.map((item) => ({

@@ -8,13 +8,14 @@ export default function Timeline() {
     return (
         <div className="container col-span-2">
             {!photos ? (
-                <>
-                    {[...new Array(4)].map((_, index) => (
-                        <Skeleton key={index} count={1} width={320} height={400} />
-                    ))}
-                </>
+                <Skeleton count={4} width={640} height={500} className="mb-5" />
             ) : photos && photos.length > 0 ? (
-                photos.map((content, index) => <p key={index}>I will be a photo</p>)
+                photos.map((content, index) => (
+                    <div key={content.docId}>
+                        <p>{content.username}</p>
+                        <img src={content.imageSrc} alt="photo" />
+                    </div>
+                ))
             ) : (
                 <p className="text-center text-2xl">Follow people to see photos!</p>
             )}

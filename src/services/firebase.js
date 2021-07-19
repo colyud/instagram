@@ -23,8 +23,20 @@ export async function getUserFollowedPhotos(userId, followingUserIds) {
     const userFollowedPhotos = result.docs.map((item) => ({
         ...item.data(),
         docId: item.id,
-    }));
+    })); // return all the photos of the user we follow to
 
-    console.log(userFollowedPhotos);
-    return userFollowedPhotos;
+    const photosWithUserDetails = await Promise.all(
+        userFollowedPhotos.map(async (photo) => {
+            let userLikedPhoto = false;
+            if (photo.likes.includes(userId)) {
+                userLikedPhoto = true;
+            }
+            const user = await getUserDocsByUserId(photo.userId);
+            const username = user[0].username;
+            return { username, ...photo, userLikedPhoto };
+        })
+    );
+    console.log(photosWithUserDetails);
+
+    return photosWithUserDetails; // userFollowedPhotos + username and is we like to each photo
 }

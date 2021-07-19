@@ -6,14 +6,25 @@ export async function doesUsernameExist(username) {
     return result.docs.map((user) => user.data().length > 0);
 }
 
-export async function getUserByUserId(userId) {
+export async function getUserDocsByUserId(userId) {
     const result = await firebase.firestore().collection("users").where("userId", "==", userId).get();
 
     const user = result.docs.map((item) => ({
         ...item.data(),
         docId: item.id,
     }));
-    console.log(user);
 
-    return user; // user in cloud firestore collection
+    return user; // return user docs in firebase collection
+}
+
+export async function getUserFollowedPhotos(userId, followingUserIds) {
+    const result = await firebase.firestore().collection("photos").where("userId", "in", followingUserIds).get();
+
+    const userFollowedPhotos = result.docs.map((item) => ({
+        ...item.data(),
+        docId: item.id,
+    }));
+
+    console.log(userFollowedPhotos);
+    return userFollowedPhotos;
 }

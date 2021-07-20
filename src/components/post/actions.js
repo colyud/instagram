@@ -35,7 +35,7 @@ export default function Actions({ docId, totalLikes, likedPhoto, handleFocus }) 
                                 handleToggleLiked((toggleLiked) => !toggleLiked);
                             }
                         }}
-                        className={`w-8 mr-4 select-none cursor-pointer ${toggleLiked ? "fill-current text-red" : "text-black"}`}
+                        className={`w-8 mr-4 select-none cursor-pointer ${toggleLiked ? "fill-current text-red-500" : "text-black"}`}
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"

@@ -25,7 +25,7 @@ export default function AddComment({ docId, comments, setComments, commentInput 
     };
 
     return (
-        <div className="border-t border-gray">
+        <div className="border-t border-gray mt-5">
             <form
                 className="flex w-full justify-between pl-0 pr-5"
                 onSubmit={(event) => (comment.length >= 3 ? handleSubmitComment(event) : event.preventDefault())}
@@ -34,7 +34,7 @@ export default function AddComment({ docId, comments, setComments, commentInput 
                 <input
                     aria-label="Add a comment"
                     autoComplete="off"
-                    className="text-sm text-gray w-full mr-3 py-5 px-4"
+                    className="text-sm text-gray w-full mr-3 py-5 px-4 outline-none"
                     type="text"
                     name="add-comment"
                     placeholder="Add a comment..."

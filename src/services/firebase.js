@@ -36,7 +36,6 @@ export async function getUserFollowingPhotos(userId, followingUserIds) {
             return { username, ...photo, userLikedPhoto };
         })
     );
-    console.log(photosWithUserDetails);
 
     return photosWithUserDetails; // userFollowedPhotos + username and is we like to each photo
 }

@@ -4,7 +4,7 @@ import SuggestedProfile from "./suggested-profile";
 import { getSuggestedProfiles } from "../../services/firebase";
 
 const Suggestions = ({ userId }) => {
-    const [profiles, setProfiles] = useState(null);
+    const [profiles, setProfiles] = useState(null); // profiles is a arr of suggested profiles
 
     useEffect(() => {
         async function suggestedProfiles() {
@@ -23,6 +23,7 @@ const Suggestions = ({ userId }) => {
             <div className="flex items-center align-items justify-between mb-2 mt-2">
                 <p className="font-bold text-gray-500 text-sm">Suggestions for you</p>
             </div>
+            {/* display each suggested profiles */}
             <div className="grid gap-5 mt-4">
                 {profiles.map((profile) => (
                     <SuggestedProfile

@@ -4,31 +4,16 @@ import SuggestedProfile from "./suggested-profile";
 import { getSuggestedProfiles } from "../../services/firebase";
 
 const Suggestions = ({ userId }) => {
-    const [profiles, setProfiles] = useState([
-        {
-            docId: "1",
-            userDocId: 1,
-            username: "dali",
-            profileId: "2",
-            userId: "3",
-        },
-        {
-            docId: "2",
-            userDocId: 1,
-            username: "orwell",
-            profileId: "2",
-            userId: "3",
-        },
-    ]);
+    const [profiles, setProfiles] = useState(null);
 
     useEffect(() => {
-        // async function suggestedProfiles() {
-        //     const response = await getSuggestedProfiles(userId);
-        //     setProfiles(response);
-        // }
-        // if (userId) {
-        //     suggestedProfiles();
-        // }
+        async function suggestedProfiles() {
+            const response = await getSuggestedProfiles(userId);
+            setProfiles(response);
+        }
+        if (userId) {
+            suggestedProfiles();
+        }
     }, [userId]);
 
     return !profiles ? (

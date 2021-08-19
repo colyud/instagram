@@ -4,21 +4,23 @@ import { getUserDocsByUserId, getUserFollowingPhotos } from "../services/firebas
 
 export default function useFollowedUsersPhotos() {
     const [photos, setPhotos] = useState(null);
-    const { user } = useContext(UserContext); // return the login user
-
-    const userId = user ? user.uid : ""; //get the uid of the login user
+    const {
+        user: { uid: userId = "" },
+    } = useContext(UserContext);
 
     useEffect(() => {
         async function getTimelinePhotos() {
-            const userDocs = await getUserDocsByUserId(userId); // return the user document in firebase collection of the login user (array of 1 user obj)
+            const followingUserIds = await getUserDocsByUserId(userId);
+            let followedUsersPhotos = [];
 
-            if (userDocs && userDocs.length > 0) {
-                const followingUserIds = userDocs[0].following;
-                const followingUserPhotos = await getUserFollowingPhotos(userId, followingUserIds); // return all the photos +name of all the user we follow to
-                followingUserPhotos.sort((a, b) => b.dateCreated - a.dateCreated); // sort by photo date
-                setPhotos(followingUserPhotos);
-            } else setPhotos(null);
+            if (followingUserIds && followingUserIds[0].following.length > 0) {
+                followedUsersPhotos = await getUserFollowingPhotos(userId, followingUserIds[0].following);
+            }
+
+            followedUsersPhotos.sort((a, b) => b.dateCreated - a.dateCreated);
+            setPhotos(followedUsersPhotos);
         }
+
         getTimelinePhotos();
     }, [userId]);
 

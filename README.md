@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+# Instagram Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React course from [Scrimba](https://scrimba.com/learn/photoapp) by **Karl Hadwen**. Scrimba is a learning platform that help you improve your coding skills by building realistic projects with the world's best coding teachers.
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+-   [Overview](#overview)
+    -   [The course](#the-course)
+    -   [Screenshot](#screenshot)
+    -   [Links](#links)
+-   [My process](#my-process)
+    -   [Built with](#built-with)
+    -   [What I learned](#what-i-learned)
+    -   [Continued development](#continued-development)
+    -   [Useful resources](#useful-resources)
+-   [Author](#author)
 
-### `npm start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### The course
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Why this course rock
 
-### `npm test`
+-   Course by **Karl Hadwen** with 93 lessons in 9 hours.
+-   Real world style project and architect.
+-   This course will take full advantage of Scrimba's interactive code-learning experience.
+-   You’ll learn to use **React**, **Firebase**, and **Tailwind**, and finish up with **fully-functioning, pro-looking Instagram clone** at the end of the course.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Screenshot
 
-### `npm run build`
+![SignUp](./public/images/screenshot/SignUp-instagram.png)
+![Login](./public/images/screenshot/Login-instagram.png)
+![Timeline](./public/images/screenshot/Instagram.png)
+![Profile](./public/images/screenshot/Profile-Instagram.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Links
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-   Live Site URL: [Instagram Clone](https://instagram.duyloc.dev/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## My process
 
-### `npm run eject`
+### Built with
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-   Flexbox
+-   CSS Grid
+-   [React](https://reactjs.org/) - JS library
+-   [React router](https://reactrouter.com/) - React library
+-   [Tailwindcss](https://tailwindcss.com/) - For styles
+-   [Firebase](https://firebase.google.com/) - For database
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### What I learned
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+-   Modem **React hook** with useState, useEffect, Lazy, Suspense.
+-   How to create a login page, a sign-up page, a header, a timeline, a profile page, a dashboard page, a post, a sidebar, a not found page, and much more!
+-   Styling by className in **Tailwindcss**.
+-   **Skeleton** component whe loading.
+-   React router to routing and protect route when user login or not.
+-   Use noSQL **Firebase** authentication user and **Firestore** to store data.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```js
+<div className="container col-span-2">
+    {!photos ? (
+        <Skeleton count={4} width={640} height={500} className="mb-5" />
+    ) : photos && photos.length > 0 ? (
+        photos.map((content) => <Post key={content.docId} content={content} />)
+    ) : (
+        <p className="text-center text-2xl">Follow people to see photos!</p>
+    )}
+</div>
+```
 
-## Learn More
+```js
+<Route path={ROUTES.LOGIN} component={Login} />
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```js
+const firebase = window.firebase.initializeApp(config);
+const { FieldValue } = window.firebase.firestore;
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Continued development
 
-### Code Splitting
+-   Responsive web design.
+-   Add hover state when hover photo in profile.
+-   Add focus state when click on photo in profile.
+-   Create, Delete photos.
+-   Add default avatar when signUp.
+-   Add dark theme.
+-   Try to create from scratch with compound component and styled component.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Useful resources
 
-### Analyzing the Bundle Size
+-   [Build an Instagram Clone in React](https://scrimba.com/learn/photoapp) - If you have nailed the basics of HTML, CSS, JavaScript, and React and feel ready to take on a massive, real-world-style project, Karl Hadwen’s Build an Instagram Clone course is perfect for you!
+-   [Cloud Firestore docs](https://firebase.google.com/docs/firestore) - This helped me for storing data, i learn a lot of how to add, query data in NoSQL. I'd recommend it to anyone learning this concept. I really liked this pattern and will use it going forward.
+-   [TaiwindCss docs](https://tailwindcss.com/docs) - This helped me for styling the whole app, i alway have an open tab to searching className, with this you don't need to write css but in my style i like the pure css more.
+-   [Scrimba community](https://discord.gg/WfcdySxt) - Join Scrimba community and meet fellow students and ask for help and reviews of your code.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Author
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-   Website - [DuyLoc](https://www.duyloc.dev)
+-   LinkedIn - [Loc Pham](https://www.linkedin.com/in/loc-pham-25a913151/)
+-   Facebook - [fb.com/locpnd](https://www.facebook.com/locpnd/)

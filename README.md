@@ -28,8 +28,8 @@ Why this course rock
 
 ### Screenshot
 
-![SignUp](./public/images/screenshot/SignUp-instagram.png)
-![Login](./public/images/screenshot/Login-instagram.png)
+![SignUp](./public/images/screenshot/SignUp-Instagram.png)
+![Login](./public/images/screenshot/Login-Instagram.png)
 ![Timeline](./public/images/screenshot/Instagram.png)
 ![Profile](./public/images/screenshot/Profile-Instagram.png)
 
